@@ -7,7 +7,7 @@ This Python script turns an RP2040-based microcontroller into a USB Rubber Ducky
 - **Automated Keystroke Injection** – Simulates text input and special key combinations.  
 - **Customizable Payloads** – Reads input commands from `script.txt`.  
 - **HID USB Compatibility** – Works with CircuitPython-supported HID devices.  
-- **Safety Mechanism** – A fuse button (GP29) prevents execution if pressed, indicated by a red flashing LED.  
+- **Safety Mechanism** – A fuse button (GP29) prevents execution if pressed, indicated by flashing LED.  
 - **LED Status Indicators** – Uses the built-in NeoPixel LED for feedback.  
 - **Persistent Evil Mode** – Can toggle between normal and "evil" mode via non-volatile memory.  
 

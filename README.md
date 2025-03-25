@@ -29,8 +29,8 @@ This Python script turns an RP2040-based microcontroller into a USB Rubber Ducky
      ```
   
 2. **Execution Process**  
-   - If the fuse button (GP29) is **not pressed**, the script runs and executes the keystrokes.  
-   - If the fuse button is **pressed**, the script halts, and the LED flashes red.  
+   - If the fuse button (GP29) is **not pressed** while starting, you are in selected mode.  
+   - While device starting, if the fuse button is **pressed**, you can change device mode.  
    - LED status indicators:  
      - 🟢 Green: 
         - 1 x blink: device in write/read mode (you can pase something to `script.txt`)

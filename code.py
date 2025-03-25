@@ -3,26 +3,59 @@ import usb_hid
 import digitalio
 import board
 import neopixel
+import microcontroller
 from adafruit_hid.keyboard import Keyboard
 from adafruit_hid.keycode import Keycode
 from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
 
-# Configure "fuse" on pin 29
-fuse_pin = digitalio.DigitalInOut(board.GP29)
-fuse_pin.direction = digitalio.Direction.INPUT
-fuse_pin.pull = digitalio.Pull.UP
+# Configure "fuse" button on pin 29
+fuse_button = digitalio.DigitalInOut(board.GP29)
+fuse_button.direction = digitalio.Direction.INPUT
+fuse_button.pull = digitalio.Pull.UP
 
 # Configure NeoPixel LED
 pixel = neopixel.NeoPixel(board.NEOPIXEL, 1)
 
-# If the pin reads 0, halt execution
-if not fuse_pin.value:
-    while True:
-        pixel[0] = (255, 0, 0)
-        time.sleep(0.5)
-        pixel[0] = (0, 0, 0)
-        time.sleep(0.5)
+def toggle_mount():
+    """Toggles the mount state by modifying the non-volatile memory and resetting the microcontroller."""
+    microcontroller.nvm[0] = int(not microcontroller.nvm[0])
+    microcontroller.reset()
 
+# Change read/write mode to evil mode
+if not microcontroller.nvm[0]:
+    if not fuse_button.value:
+        # Blink green LED twice
+        for _ in range(2):
+            pixel[0] = (0, 255, 0)
+            time.sleep(0.3)
+            pixel[0] = (0, 0, 0)
+            time.sleep(0.3)
+        toggle_mount()
+
+# Change evil mode to read/write
+if microcontroller.nvm[0]:
+    pixel[0] = (0, 255, 0)
+    time.sleep(0.5)
+    pixel[0] = (0, 0, 0)
+    time.sleep(0.5)
+    while fuse_button.value:
+        pass
+    
+    # Blink red LED four times
+    for _ in range(4):
+        pixel[0] = (255, 0, 0)
+        time.sleep(0.3)
+        pixel[0] = (0, 0, 0)
+        time.sleep(0.3)
+    
+    toggle_mount()
+
+# Blink blue LED two times, rubber ducky is ready
+for _ in range(2):
+    pixel[0] = (0, 0, 255)
+    time.sleep(0.5)
+    pixel[0] = (0, 0, 0)
+    time.sleep(0.5)
 
 # Mapping of special keys
 SPECIAL_KEYS = {
@@ -167,7 +200,7 @@ keyboard = Keyboard(usb_hid.devices)
 keyboard_layout = KeyboardLayoutUS(keyboard)
 
 # Script file with commands
-script_file = "script.txt"
+SCRIPT_FILE = "script.txt"
 
 
 def send_text_as_keystrokes(text):
@@ -211,4 +244,4 @@ def read_script_file(filename):
 
 
 # Run the function to read the script file
-read_script_file(script_file)
+read_script_file(SCRIPT_FILE)

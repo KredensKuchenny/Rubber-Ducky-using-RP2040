@@ -1,8 +1,28 @@
 import time
 import usb_hid
+import digitalio
+import board
+import neopixel
 from adafruit_hid.keyboard import Keyboard
 from adafruit_hid.keycode import Keycode
 from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
+
+# Configure "fuse" on pin 29
+fuse_pin = digitalio.DigitalInOut(board.GP29)
+fuse_pin.direction = digitalio.Direction.INPUT
+fuse_pin.pull = digitalio.Pull.UP
+
+# Configure NeoPixel LED
+pixel = neopixel.NeoPixel(board.NEOPIXEL, 1)
+
+# If the pin reads 0, halt execution
+if not fuse_pin.value:
+    while True:
+        pixel[0] = (255, 0, 0)
+        time.sleep(0.5)
+        pixel[0] = (0, 0, 0)
+        time.sleep(0.5)
+
 
 # Mapping of special keys
 SPECIAL_KEYS = {

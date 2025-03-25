@@ -7,7 +7,7 @@ This Python script simulates keyboard input based on a predefined script file. T
 - **Special Key Simulation**: Supports sending special key combinations such as `CTRL+C`, `ALT+TAB`, `ENTER`, and more.
 - **Configurable Input**: The input is read from a `script.txt` file, which can contain both text and key combinations.
 - **USB HID Compatibility**: Works with USB HID devices to simulate a real keyboard.
-- **Built-in Safety Mechanism**: A fuse mechanism (on pin GP29) prevents execution if the fuse is not intact, indicated by a flashing red LED.
+- **Built-in Safety Mechanism**: A fuse mechanism (on pin GP29) prevents code execution if the fuse button is pressed, indicated by a flashing red LED.
 
 ### Requirements:
 - Microcontroller with HID support
@@ -41,10 +41,7 @@ This script supports a wide range of keys, including:
 - **Special Keys**: `ENTER`, `ESC`, `TAB`, `SPACE`, `BACKSPACE`, etc.
 - **Control Keys**: `CTRL`, `ALT`, `SHIFT`, `WINDOWS`, `COMMAND`, etc.
 - **Number Pad Keys**: `KEYPAD_ONE`, `KEYPAD_TWO`, etc.
-
-### Safety Feature:
-- The script includes a hardware safety mechanism using a digital input on `GP29`. If the fuse is detected as broken (`LOW` signal), the execution halts, and a flashing red LED warns the user.
-
+- 
 ### Notes:
 - Ensure that your device is capable of using USB HID (e.g., an RP2040-based board).
 - The script sends simulated keystrokes to the computer as if they were typed by a physical keyboard.

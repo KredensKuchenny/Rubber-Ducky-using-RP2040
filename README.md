@@ -24,7 +24,7 @@ This Python script simulates keyboard input based on a predefined script file. T
 2. **Running the Script**:
    - Ensure the microcontroller is connected via USB.
    - If the safety fuse (GP29) is not intact, the script will execute and send keystrokes.
-   - If the fuse is broken, the built-in NeoPixel LED will flash red, and execution will halt.
+   - If the fuse is pressed, the built-in NeoPixel LED will flash red, and execution will halt.
    
 3. **Example of `script.txt`**:
 

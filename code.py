@@ -21,7 +21,7 @@ def toggle_mount():
     microcontroller.nvm[0] = int(not microcontroller.nvm[0])
     microcontroller.reset()
 
-# Change read/write mode to evil mode
+# Change evil mode to read/write 
 if not microcontroller.nvm[0]:
     if not fuse_button.value:
         # Blink green LED twice

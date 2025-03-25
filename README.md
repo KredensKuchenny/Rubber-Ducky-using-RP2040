@@ -10,7 +10,8 @@ This Python script simulates keyboard input based on a predefined script file. T
 - **USB HID Compatibility**: Works with USB HID devices to simulate a real keyboard.
 
 ### Requirements:
-To run this script, you need to ensure that your environment is set up with the appropriate HID libraries for keyboard emulation.
+ - Microcontroller with HID support
+ - CircuitPython
 
 ### Usage:
 1. **Script File**: Create a `script.txt` file where you specify the keystrokes or special key combinations. Example:

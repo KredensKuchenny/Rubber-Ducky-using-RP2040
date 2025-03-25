@@ -40,5 +40,5 @@ This script supports a wide range of keys, including:
 - **Number Pad Keys**: `KEYPAD_ONE`, `KEYPAD_TWO`, etc.
 
 ### Notes:
-- Ensure that your device is capable of using USB HID (e.g., a microcontroller like an Adafruit Feather or Raspberry Pi Pico).
+- Ensure that your device is capable of using USB HID (e.g., a microcontroller like an RP2040 Zero).
 - The script sends simulated keystrokes to the computer as if they were typed by a physical keyboard.

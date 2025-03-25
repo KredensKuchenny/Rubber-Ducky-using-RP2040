@@ -36,7 +36,7 @@ This Python script turns an RP2040-based microcontroller into a USB Rubber Ducky
         - 1 x blink: device in write/read mode (you can pase something to `script.txt`)
         - 2 x blink: changing evil mode to read/write
      - 🔴 Red:
-        - 4 x blibk: changing ead/write mode to evil
+        - 4 x blibk: changing read/write mode to evil
      - 🔵 Blue:
         -  2 x blink: ready to execute
 

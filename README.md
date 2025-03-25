@@ -20,7 +20,7 @@ To run this script, you need to ensure that your environment is set up with the 
    The script will read this file and send the corresponding keystrokes to the computer.
 
 2. **Run the Script**: 
-   - After setting up the `script.txt` file, run the Python script. The keystrokes will be sent as if typed by an actual keyboard.
+   - After setting up the `script.txt` file, CircuitPython run automatically script. The keystrokes will be sent as if typed by an actual keyboard.
 
 ### Example of `script.txt`:
 

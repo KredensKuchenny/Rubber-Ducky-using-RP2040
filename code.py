@@ -32,7 +32,7 @@ if not microcontroller.nvm[0]:
             time.sleep(0.3)
         toggle_mount()
 
-# Change evil mode to read/write
+# Change read/write to evil mode
 if microcontroller.nvm[0]:
     pixel[0] = (0, 255, 0)
     time.sleep(0.5)

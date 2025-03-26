@@ -16,12 +16,14 @@ fuse_button.pull = digitalio.Pull.UP
 # Configure NeoPixel LED
 pixel = neopixel.NeoPixel(board.NEOPIXEL, 1)
 
+
 def toggle_mount():
     """Toggles the mount state by modifying the non-volatile memory and resetting the microcontroller."""
     microcontroller.nvm[0] = int(not microcontroller.nvm[0])
     microcontroller.reset()
 
-# Change evil mode to read/write 
+
+# Change read/write mode to evil mode
 if not microcontroller.nvm[0]:
     if not fuse_button.value:
         # Blink green LED twice
@@ -32,7 +34,7 @@ if not microcontroller.nvm[0]:
             time.sleep(0.3)
         toggle_mount()
 
-# Change read/write to evil mode
+# Change evil mode to read/write
 if microcontroller.nvm[0]:
     pixel[0] = (0, 255, 0)
     time.sleep(0.5)
@@ -40,14 +42,14 @@ if microcontroller.nvm[0]:
     time.sleep(0.5)
     while fuse_button.value:
         pass
-    
+
     # Blink red LED four times
     for _ in range(4):
         pixel[0] = (255, 0, 0)
         time.sleep(0.3)
         pixel[0] = (0, 0, 0)
         time.sleep(0.3)
-    
+
     toggle_mount()
 
 # Blink blue LED two times, rubber ducky is ready
@@ -222,6 +224,15 @@ def send_special_key(command):
         time.sleep(0.1)
 
 
+def handle_sleep_command(sleep_time):
+    """Handles the sleep command by pausing the script for the specified duration."""
+    try:
+        sleep_duration = float(sleep_time)
+        time.sleep(sleep_duration)
+    except ValueError:
+        time.sleep(1)
+
+
 def read_script_file(filename):
     """Reads the file and sends its content as keyboard input."""
     try:
@@ -230,9 +241,15 @@ def read_script_file(filename):
                 line = line.strip()
 
                 if line.startswith("[") and line.endswith("]"):
-                    # Special key combination
+                    # Special key combination or sleep command
                     command = line[1:-1].upper()
-                    send_special_key(command)
+
+                    if command.startswith("SLEEP"):
+                        # Extract sleep duration
+                        sleep_time = command.split()[1]
+                        handle_sleep_command(sleep_time)
+                    else:
+                        send_special_key(command)
                 else:
                     # Regular text
                     send_text_as_keystrokes(line)

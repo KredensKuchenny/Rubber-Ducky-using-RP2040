@@ -1,4 +1,4 @@
-# Rubber Ducky Emulator for RP2040
+# Rubber Ducky using RP2040
 
 This Python script turns an RP2040-based microcontroller into a USB Rubber Ducky-style keyboard emulator. It reads keystrokes from a predefined script file (`script.txt`) and simulates them as if they were typed by a real keyboard.
 
